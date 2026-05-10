@@ -13,7 +13,8 @@
 ## 📸 Screenshots
 
 | Dashboard | Log Analyzer | Config Generator |
-|-----------|-------------|-----------------|
+|-------------|--------------|------------------|
+| ![Dashboard](screenshots/dashboard.png) | ![Log Analyzer](screenshots/log-analyzer.png) | ![Config Generator](screenshots/config-generator.png) |
 | Real-time stats & charts | AI-powered syslog analysis | Intent-to-IOS-CLI |
 
 ---
