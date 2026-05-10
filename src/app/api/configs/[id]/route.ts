@@ -5,16 +5,17 @@ import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const config = await prisma.savedConfig.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!config) {
@@ -25,7 +26,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    await prisma.savedConfig.delete({ where: { id: params.id } });
+    await prisma.savedConfig.delete({ where: { id } });
 
     return NextResponse.json({ success: true, message: "Config deleted" });
   } catch (error) {
@@ -36,9 +37,10 @@ export async function DELETE(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -46,7 +48,7 @@ export async function PATCH(
 
     const body = await request.json();
     const config = await prisma.savedConfig.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!config) {
@@ -58,7 +60,7 @@ export async function PATCH(
     }
 
     const updated = await prisma.savedConfig.update({
-      where: { id: params.id },
+      where: { id },
       data: { applied: Boolean(body.applied) },
     });
 

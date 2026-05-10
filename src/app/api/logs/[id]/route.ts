@@ -8,9 +8,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -19,9 +20,8 @@ export async function PATCH(
     const body = await request.json();
     const { resolved } = body;
 
-    // Find the log and verify ownership (or admin)
     const log = await prisma.logEntry.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!log) {
@@ -33,7 +33,7 @@ export async function PATCH(
     }
 
     const updated = await prisma.logEntry.update({
-      where: { id: params.id },
+      where: { id },
       data: { resolved: Boolean(resolved) },
     });
 
@@ -46,16 +46,17 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const log = await prisma.logEntry.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!log) {
@@ -66,7 +67,7 @@ export async function DELETE(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    await prisma.logEntry.delete({ where: { id: params.id } });
+    await prisma.logEntry.delete({ where: { id } });
 
     return NextResponse.json({ success: true, message: "Log deleted" });
   } catch (error) {
