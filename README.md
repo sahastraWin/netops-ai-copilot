@@ -397,9 +397,6 @@ npx tsx scripts/seed.ts  # Seed demo accounts
 
 ---
 
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) file for details.
 
 ---
 
