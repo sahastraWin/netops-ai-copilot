@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 13% 7%;
+    --foreground: 210 40% 94%;
+    --card: 220 13% 10%;
+    --card-foreground: 210 40% 94%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 210 40% 94%;
+    --primary: 196 100% 46%;
+    --primary-foreground: 220 13% 7%;
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 210 40% 90%;
+    --muted: 220 13% 14%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 220 13% 16%;
+    --accent-foreground: 210 40% 94%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 18%;
+    --input: 220 13% 14%;
+    --ring: 196 100% 46%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #080c10;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d1117;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #374151;
+  }
+}
+
+/* =============================================
+   CISCO-THEMED DESIGN TOKENS
+   ============================================= */
+@layer components {
+  /* Glowing border effect for cards */
+  .cisco-card {
+    @apply bg-[#0d1117] border border-[#1f2937] rounded-xl;
+    background: linear-gradient(135deg, #0d1117 0%, #0a1525 100%);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cisco-card:hover {
+    border-color: rgba(0, 188, 235, 0.2);
+    box-shadow: 0 0 20px rgba(0, 188, 235, 0.05);
+  }
+
+  /* Glowing Cisco blue accent line */
+  .cisco-accent-border {
+    border-left: 3px solid #00bceb;
+  }
+
+  /* Terminal-style code block */
+  .terminal-block {
+    @apply bg-[#020408] border border-[#1f2937] rounded-lg p-4 font-mono text-sm;
+    background: linear-gradient(180deg, #020408 0%, #050a10 100%);
+  }
+
+  /* Network grid background */
+  .net-grid {
+    background-image:
+      linear-gradient(rgba(0, 188, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 188, 235, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Pulsing critical alert indicator */
+  .alert-critical {
+    @apply relative;
+  }
+  .alert-critical::before {
+    content: '';
+    @apply absolute inset-0 rounded-full bg-red-500 opacity-50;
+    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Cisco-blue glow button */
+  .btn-cisco {
+    @apply bg-[#00bceb] text-[#080c10] font-semibold px-4 py-2 rounded-lg;
+    transition: all 0.2s ease;
+  }
+  .btn-cisco:hover {
+    background: #00d4ff;
+    box-shadow: 0 0 20px rgba(0, 188, 235, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Status dots */
+  .status-online { @apply bg-[#6cc04a]; }
+  .status-warning { @apply bg-yellow-400; }
+  .status-critical { @apply bg-red-500; }
+  .status-offline { @apply bg-gray-600; }
+
+  /* Sidebar nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium;
+    @apply text-gray-400 hover:text-white hover:bg-white/5;
+    transition: all 0.15s ease;
+  }
+  .nav-item.active {
+    @apply text-[#00bceb] bg-[#00bceb]/10;
+    border-left: 2px solid #00bceb;
+  }
+}
+
+/* =============================================
+   MARKDOWN RENDERING (AI responses)
+   ============================================= */
+.prose-dark {
+  color: #d1d5db;
+  line-height: 1.7;
+}
+.prose-dark h1, .prose-dark h2, .prose-dark h3 {
+  color: #f9fafb;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+.prose-dark strong {
+  color: #f3f4f6;
+  font-weight: 600;
+}
+.prose-dark code {
+  background: #0d1117;
+  border: 1px solid #1f2937;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: #00bceb;
+}
+.prose-dark pre {
+  background: #020408;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+.prose-dark pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #e5e7eb;
+}
+.prose-dark ul, .prose-dark ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+.prose-dark li {
+  margin-bottom: 0.25rem;
+}
+.prose-dark p {
+  margin-bottom: 0.75rem;
+}
+.prose-dark hr {
+  border-color: #1f2937;
+  margin: 1rem 0;
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scanLine {
+  0%   { transform: translateY(-2px); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 188, 235, 0.2); }
+  50%       { box-shadow: 0 0 20px rgba(0, 188, 235, 0.5), 0 0 40px rgba(0, 188, 235, 0.2); }
+}
+@keyframes dataFlow {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 0% 200%; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Stagger animation delays for list items */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
