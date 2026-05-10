@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🌐 NetOps AI Copilot
 
 > An AI-powered network operations dashboard for Cisco engineers — built with Next.js 15, Prisma, MongoDB, Auth.js v5, and Ollama (local LLM with OpenAI fallback).
@@ -419,6 +418,4 @@ MIT License — see [LICENSE](LICENSE) file for details.
   <sub>NetOps AI Copilot — Where Intent Meets Network Intelligence</sub>
 </div>
 =======
-# netops-ai-copilot
-AI-powered Network Operations Copilot built with Next.js &amp; Prisma.  Automates network monitoring, incident response, and infrastructure  management using LLM-driven insights. Designed for DevOps &amp; NetOps  teams to streamline operations through intelligent automation.
->>>>>>> ed8c62906947f6be9a16522cad94005dca0db8bd
+
