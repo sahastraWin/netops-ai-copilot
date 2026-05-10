@@ -66,13 +66,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     // JWT callback: called when token is created or updated
     // This is where we embed the user's role into the token
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as { role: Role }).role;
-        token.id = user.id;
-      }
-      return token;
-    },
+ async jwt({ token, user }) {
+  if (user) {
+    token.role = (user as { role: Role }).role;
+    token.id = user.id ?? "";
+  }
+  return token;
+},
 
     // Session callback: called when session is accessed via useSession()
     // Expose role to the client session
